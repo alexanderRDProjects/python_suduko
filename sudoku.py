@@ -122,7 +122,7 @@ column_error = 0
 complete_first_stage = False
 global numbers_add
 numbers_add = 0
-def insert(row,cseg,cplace,number):
+def insert(row,cseg,cplace,number,numbers_add,row_error,assign,box_error,column_error):
     if board[row][cseg][cplace] == "":
         if check_row(row,cseg,cplace,number):
             if check_column(row,cseg,cplace,number):
@@ -130,19 +130,19 @@ def insert(row,cseg,cplace,number):
                     board[row][cseg][cplace] = number
                     numbers_add += 1
                     print "numbers added ",numbers_add
-                    return True
+                    return True,numbers_add,row_error,assign,box_error,column_error
                 else:
                     box_error += 1
-                    return False
+                    return False,numbers_add,row_error,assign,box_error,column_error
             else:
                 column_error += 1
-                return False
+                return False,numbers_add,row_error,assign,box_error,column_error
         else:
             row_error += 1
-            return False
+            return False,numbers_add,row_error,assign,box_error,column_error
     else:
         assign += 1
-        return False
+        return False,numbers_add,row_error,assign,box_error,column_error
 # first stage add some random number into the sudoku
 while complete_first_stage == False:
     complete_first_stage = True
@@ -161,7 +161,7 @@ while complete_first_stage == False:
     cplace = column % 3
     #print board[row][cseg][cplace]
     number = rand(0,8)
-    val = insert(row,cseg,cplace,number)
+    val,numbers_add,row_error,assign,box_error,column_error = insert(row,cseg,cplace,number,numbers_add,row_error,assign,box_error,column_error)
     #print row_error
 
 NSE = False
