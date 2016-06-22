@@ -161,7 +161,13 @@ while complete_first_stage == False:
     cplace = column % 3
     #print board[row][cseg][cplace]
     number = rand(0,8)
-    val,numbers_add,row_error,assign,box_error,column_error = insert(row,cseg,cplace,number,numbers_add,row_error,assign,box_error,column_error)
+    val,numbers_add,row_error,assign,box_error,column_error = insert(row,cseg,
+                                                                     cplace,number,
+                                                                     numbers_add,
+                                                                     row_error,
+                                                                     assign,
+                                                                     box_error,
+                                                                     column_error)
     #print row_error
 
 NSE = False
@@ -171,7 +177,13 @@ for row in range(9):
             inserted = False
             for i in range(9):
                 if not inserted:
-                    inserted = insert(row,cseg,cplace,i)
+                    inserted,numbers_add,row_error,assign,box_error,column_error = insert(row,cseg,
+                                                                     cplace,number,
+                                                                     numbers_add,
+                                                                     row_error,
+                                                                     assign,
+                                                                     box_error,
+                                                                     column_error)
             if not inserted:
                  NSE = True
         if NSE:
